@@ -32,8 +32,8 @@ contract('CrowdFunding', (accounts) =>{
         let campaignName = await contract.name.call()
         expect(campaignName).to.equal('funding');
 
-        // let targetAmount = await contract.targetAmount.call()
-        // expect(targetAmount.toNumber()).to.equal(ONE_ETH);
+        let targetAmount = await contract.targetAmount.call()
+        expect(Number(targetAmount)).to.equal(ONE_ETH);
 
         let actualBeneficiary = await contract.beneficiary.call()
         expect(actualBeneficiary).to.equal(beneficiary);
