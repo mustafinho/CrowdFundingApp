@@ -28,7 +28,7 @@ contract('CrowdFunding', (accounts) =>{
     });
 
     it('contract is initialized', async () =>{
-        
+
         let campaignName = await contract.name.call()
         expect(campaignName).to.equal('funding');
 
@@ -42,4 +42,19 @@ contract('CrowdFunding', (accounts) =>{
         // expect(state.valueOf()).to.equal(STATE.ongoing);
 
     });
+
+    it("founds are contributed", async () =>{
+        await contract.contribute({
+            value: ONE_ETH,
+            from: contractCreator
+        });
+
+        let contributed = await contract.amounts
+            .call(contractCreator);
+        expect(Number(contributed)).to.equal(ONE_ETH);
+
+        let totalCollected = await contract.totalCollected.call();
+        expect(Number(totalCollected)).to.equal(ONE_ETH);
+    });
+
 })
