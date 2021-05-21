@@ -10,6 +10,12 @@ contract CrowdFunding{
         PaidOut
     }
 
+    event CampaignFinished(
+        address addr,
+        uint totalCollected,
+        bool suceeded
+    );
+
     string public name;
     uint public targetAmount;
     uint public fundingDeadLine;
@@ -49,6 +55,8 @@ contract CrowdFunding{
         if(totalCollected >= targetAmount){
             collected = true;
         }
+
+        emit CampaignFinished(this, totalCollected, collected);
     }
 
     function finishCrowdFunding() public inState(State.Ongoing) {

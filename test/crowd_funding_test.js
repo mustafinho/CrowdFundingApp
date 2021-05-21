@@ -128,4 +128,19 @@ contract('CrowdFunding', (accounts) =>{
         let amount = await contract.amounts.call(contractCreator);
         expect(Number(amount)).to.equal(0);
     })
+
+    // it('event is emitted', async ()=>{
+    //     let watcher = contract.CampaignFinished();
+
+    //     await contract.setCurrentTime(601);
+    //     await contract.finishCrowdFunding();
+
+    //     /*this method returns an array of events, we are subscribing to all the events
+    //     that 'watcher' have*/
+
+    //     let events = await watcher.get();
+    //     let event = events[0];
+    //     expect(Number(event.args.totalCollected)).to.equal(0);
+    //     expect(event.arg.suceeded).to.equal(false);
+    // })
 })
