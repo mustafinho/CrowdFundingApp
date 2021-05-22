@@ -1,6 +1,10 @@
 pragma solidity ^0.4.24;
 
+import "./Utils.sol";
+
 contract CrowdFunding{
+
+    using Utils for *;
     
     //@dev: tracks the state of the crowdfunding process
     enum State {
@@ -39,8 +43,8 @@ contract CrowdFunding{
 
     {
         name = contractName;
-        targetAmount = targetAmountEth * 1 ether;
-        fundingDeadLine = currentTime() + durationInMin * 1 minutes;
+        targetAmount = Utils.etherToWei(targetAmountEth);
+        fundingDeadLine = currentTime() + Utils.minutesToSeconds(durationInMin);
         beneficiary = beneficiaryAddress;
         state = State.Ongoing;
     }
